@@ -1,0 +1,17 @@
+SELECT  bike_trip.trip_id,
+        bike_trip.start_date,
+        bike_trip.subscriber_type,
+        bike_trip.start_station_name,
+        bike_trip.start_station_id,
+        bike_stat.station_id,
+        bike_stat.name,
+        bike_stat.landmark
+        
+FROM `bigquery-public-data.san_francisco.bikeshare_trips` AS bike_trip
+JOIN `bigquery-public-data.san_francisco.bikeshare_stations` AS bike_stat
+ON bike_trip.start_station_id = bike_stat.station_id
+WHERE bike_trip.start_date BETWEEN '2016-01-01' AND '2016-03-31'
+  AND bike_trip.subscriber_type = 'Subscriber'
+  AND bike_stat.landmark = 'Redwood City'
+
+LIMIT 10000
